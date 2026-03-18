@@ -1,3 +1,4 @@
+import binarytree.BinaryTree;
 import linkedlist.LinkedList;
 import linkedlist.Node;
 import queue.ArrayQueue;
@@ -7,19 +8,13 @@ import stack.StackArray;
 
 public class Main {
     public static void main(String[] args) {
-        PriorityQueue pq = new PriorityQueue();
-        pq.enqueue(3);
-        pq.enqueue(1);
-        pq.enqueue(5);
-        pq.enqueue(2);
-        pq.enqueue(4);
-        pq.dequeue();
-        pq.dequeue();
-        pq.dequeue();
-        pq.dequeue();
-        pq.dequeue();
-        for(int i: pq){
-            System.out.println(i);
-        }
+        BinaryTree bt = new BinaryTree();
+        bt.add(4);
+        bt.add(2);
+        bt.add(6);
+        bt.add(1);
+        bt.add(3);
+        bt.add(5);
+        bt.add(7);
     }
 }
