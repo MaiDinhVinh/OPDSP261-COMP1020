@@ -15,6 +15,9 @@ public class Main {
         bt.add(1);
         bt.add(3);
         bt.add(5);
+        bt.add(8);
         bt.add(7);
+        bt.remove(6);
+        bt.preOrderTraverse();
     }
 }
