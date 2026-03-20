@@ -77,29 +77,71 @@ public class BinaryTree {
         }
     }
 
-    private BinaryNode findParent(int i){
+    private BinaryNode[] findParent(int i){
         BinaryNode bn = this.head;
-        return this.findParent(bn, i);
+        return this.findParent(bn, bn, i);
     }
 
-    private BinaryNode findParent(BinaryNode bn, int i){
-        if(bn == null){
-            throw new NoSuchElementException("bro your parent went to buy sum milk");
-        }else if(bn.getLeft().getValue() == i || bn.getRight().getValue() == i){
-            return bn;
-        }else if()
+    private BinaryNode[] findParent(BinaryNode bn, BinaryNode parent, int i){
+        if (bn == null) {
+            return null;
+        }else if(i > bn.getValue()){
+            return this.findParent(bn.getRight(), bn, i);
+        }else if(i < bn.getValue()){
+            return this.findParent(bn.getLeft(), bn, i);
+        }else if(i == this.head.getValue()){
+            return new BinaryNode[]{bn, null};
+        }else{
+            return new BinaryNode[]{bn, parent};
+        }
     }
 
     public void remove(int i){
         BinaryNode remove = this.find(i);
+        BinaryNode removeParent = this.findParent(i)[1];
         if(remove == null){
             throw new NoSuchElementException("nah nothing was found");
         }else{
             if(remove.getRight() == null){
-                if(this.head.getValue() == remove.getValue()){
+                if(removeParent == null){
                     this.head = remove.getLeft();
                 }else{
-
+                    if(i >= removeParent.getValue()){
+                        removeParent.setRight(remove.getLeft());
+                    }else{
+                        removeParent.setLeft(remove.getLeft());
+                    }
+                }
+            }else if(remove.getRight().getLeft() == null){
+                BinaryNode removeLeft = remove.getLeft();
+                if(removeParent == null){
+                    this.head = this.head.getRight();
+                }else{
+                    if(i >= removeParent.getValue()){
+                        removeParent.setRight(remove.getRight());
+                    }else{
+                        removeParent.setLeft(remove.getRight());
+                    }
+                }
+                this.add(removeLeft.getValue());
+            }else if(remove.getRight().getLeft() != null){
+                BinaryNode left = remove.getRight();
+                BinaryNode leftMost = remove.getRight().getLeft();
+                while(leftMost.getLeft() != null){
+                    left = leftMost;
+                    leftMost = leftMost.getLeft();
+                }
+                left.setLeft(leftMost.getRight());
+                leftMost.setLeft(remove.getLeft());
+                leftMost.setRight(remove.getRight());
+                if(removeParent == null){
+                    this.head = leftMost;
+                }else{
+                    if(i >= removeParent.getValue()){
+                        removeParent.setRight(leftMost);
+                    }else{
+                        removeParent.setLeft(leftMost);
+                    }
                 }
             }
         }
