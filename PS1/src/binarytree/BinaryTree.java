@@ -146,4 +146,8 @@ public class BinaryTree {
             }
         }
     }
+
+    public void clear(){
+        this.head = null;
+    }
 }
