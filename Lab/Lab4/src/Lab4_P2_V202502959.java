@@ -1,5 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+/**
+ * THEORY QUESTION
+ *
+ * When a class implements 2 identical methods from the interfaces, we have 2 cases
+ * 1 - If it is the abstract method, just override it because it is the same action for both
+ * interface
+ * 2- If it is the default interface method, the implementing class must override that default
+ * method*/
 public class Lab4_P2_V202502959 {
     public static void main(String[] args) {
         // try-with-resources so scanner closes by itself
