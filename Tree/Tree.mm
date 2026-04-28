@@ -1,8 +1,8 @@
 <map version="freeplane 1.12.15">
 <!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
 <bookmarks/>
-<node TEXT="Tree" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1777174570034" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt"><hook NAME="MapStyle" background="#2e3440ff" zoom="1.4641001">
-    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" auto_compact_layout="true" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/dark_nord_template.mm" followedTemplateLocation="template:/dark_nord_template.mm" followedMapLastTime="1777174276858" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
+<node TEXT="Tree" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1777174570034" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt"><hook NAME="MapStyle" background="#2e3440ff" zoom="0.82644624">
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" auto_compact_layout="true" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/dark_nord_template.mm" followedTemplateLocation="template:/dark_nord_template.mm" followedMapLastTime="1771869880000" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
 <map_styles>
@@ -83,7 +83,7 @@
 </hook>
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<node TEXT="Chapter 23 - Trees" POSITION="bottom_or_right" ID="ID_1862429816" CREATED="1777181252471" MODIFIED="1777181745670" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="Binary Tree" POSITION="bottom_or_right" ID="ID_1862429816" CREATED="1777181252471" MODIFIED="1777356944949" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
 <node TEXT="Tree definition" POSITION="top_or_left" ID="ID_147585650" CREATED="1777181684099" MODIFIED="1777181690032">
 <node TEXT="A set of nodes connected by edges that indicates the relationship between nodes. The nodes are arranged in levels to indicates its hierarchy" ID="ID_1220054281" CREATED="1777181690189" MODIFIED="1777181729910">
 <node TEXT="Figure 23.5" ID="ID_552685174" CREATED="1777181731533" MODIFIED="1777181736281">
@@ -220,6 +220,13 @@
 </node>
 </node>
 </node>
+<node TEXT="Traversal" POSITION="top_or_left" ID="ID_1700918923" CREATED="1777356813070" MODIFIED="1777356819339">
+<node TEXT="DFS - Depth-first Search" ID="ID_1868900863" CREATED="1777356819620" MODIFIED="1777356831179">
+<node TEXT="Preorder" ID="ID_1462772625" CREATED="1777356831334" MODIFIED="1777356841364"/>
+<node TEXT="Inorder" ID="ID_1944455494" CREATED="1777356842953" MODIFIED="1777356847474"/>
+<node TEXT="Postorder" ID="ID_1918542724" CREATED="1777356849630" MODIFIED="1777356854146"/>
+</node>
+</node>
 <node TEXT="Tree and Binary Tree Interface in Java" POSITION="top_or_left" ID="ID_1722966778" CREATED="1777180568889" MODIFIED="1777180594670" VSHIFT_QUANTITY="25.5 pt">
 <node TEXT="Created to accomodate all kinds of Tree (especially the Binary Tree)" ID="ID_1642096196" CREATED="1777180578300" MODIFIED="1777180591959">
 <node ID="ID_249724211" CREATED="1777180597270" MODIFIED="1777180645692"><richcontent TYPE="NODE">
@@ -235,6 +242,31 @@
   </body>
 </html>
 </richcontent>
+</node>
+</node>
+</node>
+<node TEXT="Binary Search Tree deletion algorithm" POSITION="top_or_left" ID="ID_1792595569" CREATED="1777386646059" MODIFIED="1777386655671">
+<node TEXT="It has 3 cases" ID="ID_704643946" CREATED="1777386655879" MODIFIED="1777386668984">
+<node TEXT="" ID="ID_637620904" CREATED="1777393977905" MODIFIED="1777393977905">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="1 - Leaf Node" ID="ID_161559437" CREATED="1777386669358" MODIFIED="1777386917762">
+<node TEXT="Algorithm: Just delete it" ID="ID_941402779" CREATED="1777386917880" MODIFIED="1777386923176"/>
+</node>
+<node TEXT="2 - A node that has only 1 child (either left or right child)" ID="ID_924065935" CREATED="1777386928755" MODIFIED="1777386948780">
+<node TEXT="Algorithm: Just reassign the left/right child to the parent of the deleting node" ID="ID_86250189" CREATED="1777386974136" MODIFIED="1777386992138">
+<node TEXT="Figure 25.7" ID="ID_1823203553" CREATED="1777386992324" MODIFIED="1777387011026">
+<font BOLD="true" ITALIC="true"/>
+</node>
+</node>
+</node>
+<node TEXT="3 - A node that has 2 children node" ID="ID_1335100744" CREATED="1777387040996" MODIFIED="1777387054501">
+<node TEXT="Algorithm: There exists a value &quot;a&quot; that is the largest in the left subtree and a value &quot;b&quot; that is the smallest in the right subtree of the root node (with value &quot;e&quot;) =&gt; we will replace &quot;e&quot; with either &quot;a&quot; or &quot;b&quot; =&gt; The problem transform to finding &quot;a&quot; (i.e: Finding the right most node in the left subtree and finding the left most node in the right subtree) (this is what we studied, just not explained properly)" ID="ID_736534644" CREATED="1777387054617" MODIFIED="1777388266178"/>
+</node>
+<node TEXT="" ID="ID_147980644" CREATED="1777393977894" MODIFIED="1777393977903">
+<hook NAME="SummaryNode"/>
+<hook NAME="AlwaysUnfoldedNode"/>
+<node TEXT="These are all general cases, we have to consider to edge case too" ID="ID_867718808" CREATED="1777393977911" MODIFIED="1777393994540"/>
 </node>
 </node>
 </node>
