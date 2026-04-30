@@ -138,6 +138,7 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T>{
             return findParent(value, node.getLeft());
         }else{
             return null;
+            
         }
     }
 }
