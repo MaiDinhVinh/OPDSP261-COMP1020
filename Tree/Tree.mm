@@ -270,6 +270,141 @@
 </node>
 </node>
 </node>
+<node TEXT="The efficiency of Operations" POSITION="top_or_left" ID="ID_985884156" CREATED="1777602689482" MODIFIED="1777602894255" VSHIFT_QUANTITY="72 pt">
+<node TEXT="add, remove, getEntry" ID="ID_1007506320" CREATED="1777602884628" MODIFIED="1777602890941">
+<node TEXT="These operations will start at the beginning of the tree, and worst, ending at leaf nodes (if no entry is found)" ID="ID_1721290565" CREATED="1777602891718" MODIFIED="1777602946202">
+<node TEXT="The maximum amount of comparison between them is directly proportional to the height of the tree" ID="ID_1482133188" CREATED="1777602947659" MODIFIED="1777603005101">
+<node TEXT="\latex the complexity of the operation is $$O(h)$$" ID="ID_1905168068" CREATED="1777603005109" MODIFIED="1777603022826"/>
+</node>
+<node TEXT="In the case of the height of the tree equals to the number of node =&gt; A linked chain (albeit like linkedlist)" ID="ID_1164672222" CREATED="1777603041196" MODIFIED="1777603063397">
+<node TEXT="\latex the complexity of the operation is $$O(n)$$" ID="ID_3752615" CREATED="1777603063409" MODIFIED="1777603076504"/>
+</node>
+<node TEXT="In the case of a full binary tree" ID="ID_743041503" CREATED="1777603103140" MODIFIED="1777603109431">
+<node TEXT="\latex the height of a full binary tree is $$log_2(n+1)$$" ID="ID_220238937" CREATED="1777603128212" MODIFIED="1777603151829">
+<node TEXT="In the worst case, searching the whole full binary tree could be searching the height of the binary tree" ID="ID_1608445810" CREATED="1777603202545" MODIFIED="1777603228301">
+<node TEXT="\latex the complexity of the operation is $$O(log n)$$" ID="ID_1530054005" CREATED="1777603228882" MODIFIED="1777603243810"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="The importance of Balance" POSITION="top_or_left" ID="ID_1454604721" CREATED="1777603406398" MODIFIED="1777603416797" VSHIFT_QUANTITY="53.85827 pt" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="We don&apos;t need a full binary tree to get O(log n) complexity on addition, removal, and retrieval operations" ID="ID_415848439" CREATED="1777603432311" MODIFIED="1777603524363">
+<node TEXT="For example, if we remove some of the leaves from a full tree, we won&apos;t change the performance of the operation" ID="ID_1884269267" CREATED="1777603532093" MODIFIED="1777603702194"/>
+</node>
+<node TEXT="" ID="ID_351566689" CREATED="1777603807626" MODIFIED="1777603807626">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="Completely Balanced Tree" ID="ID_1683846240" CREATED="1777603731010" MODIFIED="1777603872122" VSHIFT_QUANTITY="86.74016 pt">
+<node TEXT="A tree with the difference in height between subtrees OF EACH NODE are 0" ID="ID_390087500" CREATED="1777603742175" MODIFIED="1777607375365"/>
+</node>
+<node TEXT="Height Balanced or Balanced Tree" ID="ID_1196528964" CREATED="1777603756304" MODIFIED="1777603873966" VSHIFT_QUANTITY="-3.40157 pt">
+<node TEXT="A tree with the difference in height between subtrees OF EACH NODE are no more than 1" ID="ID_320820354" CREATED="1777603765653" MODIFIED="1777608163488"/>
+</node>
+<node TEXT="" ID="ID_1921147744" CREATED="1777603807622" MODIFIED="1777603868285" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<hook NAME="SummaryNode"/>
+<hook NAME="AlwaysUnfoldedNode"/>
+<node TEXT="Balanced and complete tree VS Balanced and incomplete tree" ID="ID_828663179" CREATED="1777603807627" MODIFIED="1777603868283" HGAP_QUANTITY="17.9685 pt">
+<node TEXT="Figure 25-14" ID="ID_1416459236" CREATED="1777603857211" MODIFIED="1777603863330">
+<font BOLD="true" ITALIC="true"/>
+<node TEXT="It happens that all mentioned operations will have O(log n) performance if the tree is height balanced" ID="ID_1157456384" CREATED="1777604099726" MODIFIED="1777604126414">
+<node TEXT="However, the height balanced property of a tree will be affected by adding, or removing entries" ID="ID_476467979" CREATED="1777604130539" MODIFIED="1777604158486"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="Balanced Search Tree" POSITION="top_or_left" ID="ID_806582737" CREATED="1777604418897" MODIFIED="1777604434797">
+<node TEXT="AVL Tree" ID="ID_154436571" CREATED="1777604435135" MODIFIED="1777610563930" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="We can make multiple representation of Binary Search Tree from the same collection of data" ID="ID_528025520" CREATED="1777604477862" MODIFIED="1777604492689">
+<node TEXT="Some of them might be balanced, some of them may not" ID="ID_121483739" CREATED="1777604624174" MODIFIED="1777604632087">
+<node TEXT="We can take an unbalanced binary search tree and arrange its nodes to get a balanced binary search tree" ID="ID_1749747730" CREATED="1777604719677" MODIFIED="1777604775484">
+<node TEXT="The idea of rearranging the nodes to balance the tree is called AVL tree" ID="ID_283834924" CREATED="1777604848076" MODIFIED="1777604895214"/>
+</node>
+</node>
+</node>
+<node TEXT="Definition: AVL Tree is a Binary Search Tree that rearranges its nodes whenever it becomes unbalanced" ID="ID_1074343824" CREATED="1777604901571" MODIFIED="1777604955949">
+<node TEXT="The balance of the tree is broken only when we add, or remove a node" ID="ID_105830295" CREATED="1777604958692" MODIFIED="1777604992241">
+<node TEXT="During these 2 operations, AVL tree will rearrange nodes to maintain balance" ID="ID_1383115512" CREATED="1777604992381" MODIFIED="1777605010307"/>
+</node>
+</node>
+<node TEXT="Balanced Node" ID="ID_1859972661" CREATED="1777605045015" MODIFIED="1777605227257">
+<node TEXT="A node is called balanced if it is the root of a balanced tree or completely balanced tree" ID="ID_1209365001" CREATED="1777605228287" MODIFIED="1777605265643"/>
+</node>
+<node TEXT="Single Rotation" ID="ID_350064265" CREATED="1777605361387" MODIFIED="1777605367458">
+<node TEXT="" ID="ID_471518562" CREATED="1777609331569" MODIFIED="1777609331569">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="Right Rotation" ID="ID_1026430737" CREATED="1777605370480" MODIFIED="1777605374783">
+<node TEXT="The addition occured in the left subtree of the left child of the root node" ID="ID_727403423" CREATED="1777605613658" MODIFIED="1777610729414">
+<node TEXT="Figure 27-3" ID="ID_218283374" CREATED="1777605682716" MODIFIED="1777606458296">
+<font BOLD="true" ITALIC="true"/>
+</node>
+<node TEXT="Pseudocode - 27.2" ID="ID_504046879" CREATED="1777606380829" MODIFIED="1777606420559">
+<font BOLD="true" ITALIC="true"/>
+</node>
+</node>
+</node>
+<node TEXT="Left Rotation" ID="ID_195928741" CREATED="1777605568024" MODIFIED="1777605571368">
+<node TEXT="The addition occured in the right subtree of the right child of the root node" ID="ID_1926858904" CREATED="1777605630466" MODIFIED="1777610744808">
+<node TEXT="Figure 27-5" ID="ID_534703276" CREATED="1777605687955" MODIFIED="1777606468410">
+<font BOLD="true" ITALIC="true"/>
+</node>
+<node TEXT="Pseudocode - 27.3" ID="ID_659788399" CREATED="1777606423056" MODIFIED="1777606435145">
+<font BOLD="true" ITALIC="true"/>
+</node>
+</node>
+</node>
+<node TEXT="" ID="ID_1616336560" CREATED="1777609331547" MODIFIED="1777609331569">
+<hook NAME="SummaryNode"/>
+<hook NAME="AlwaysUnfoldedNode"/>
+<node TEXT="Which root of the unbalanced tree will contain the pivot of the rotation (which child will be the pivot will depend on the type of rotation, left or right)" ID="ID_536229445" CREATED="1777609331570" MODIFIED="1777609612580"/>
+<node TEXT="In both cases, we can imagine node C rotating above node N (C is the child node of node N)" ID="ID_1714579595" CREATED="1777610758187" MODIFIED="1777610879789"/>
+</node>
+</node>
+<node TEXT="Double Rotation" ID="ID_661170761" CREATED="1777610557610" MODIFIED="1777610563930" VSHIFT_QUANTITY="69.16536 pt" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="A double rotation is accomplished by performing 2 single rotations" ID="ID_1311168733" CREATED="1777611236546" MODIFIED="1777611268143">
+<node TEXT="1. A rotation about node N&apos;s grandchild G" ID="ID_1053248501" CREATED="1777611271483" MODIFIED="1777611285288"/>
+<node TEXT="2. A rotation about node N&apos;s new child" ID="ID_1178621719" CREATED="1777611285739" MODIFIED="1777611294974"/>
+</node>
+<node TEXT="An imbalance at node N of an AVL tree can be corrected by a double rotation" ID="ID_1518770072" CREATED="1777611433481" MODIFIED="1777611488804" VSHIFT_QUANTITY="18.14173 pt">
+<node TEXT="Right-Left Rotation" ID="ID_1405858092" CREATED="1777611458734" MODIFIED="1777611465931">
+<node TEXT="Used when the addition occurs in the left subtree of N&apos;s right child" ID="ID_1125700291" CREATED="1777611551448" MODIFIED="1777611568899">
+<node TEXT="Figure 27-7" ID="ID_804203983" CREATED="1777611789533" MODIFIED="1777611792914">
+<font BOLD="true" ITALIC="true"/>
+</node>
+<node TEXT="Pseudocode 27.4" ID="ID_1316602312" CREATED="1777611793298" MODIFIED="1777611812643">
+<font BOLD="true" ITALIC="true"/>
+</node>
+</node>
+</node>
+<node TEXT="Left-Right Rotation" ID="ID_1646270198" CREATED="1777611467852" MODIFIED="1777611478675">
+<node TEXT="Used when the addition occurs in the right subtree of N&apos;s left child" ID="ID_1721132549" CREATED="1777611572043" MODIFIED="1777611582972">
+<node TEXT="Figure 27-9" ID="ID_1705210801" CREATED="1777612004561" MODIFIED="1777612013828">
+<font BOLD="true" ITALIC="true"/>
+</node>
+<node TEXT="Pseudocode 27.5" ID="ID_1748745978" CREATED="1777611988970" MODIFIED="1777612003417">
+<font BOLD="true" ITALIC="true"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="AVL Tree Implementation" ID="ID_1142175948" CREATED="1777614299818" MODIFIED="1777614309227" VSHIFT_QUANTITY="94.11024 pt">
+<node TEXT="It just reuses all algorithms from BinarySearchTree&lt;T&gt; but with some new algorithms" ID="ID_1310128371" CREATED="1777614442536" MODIFIED="1777614493412">
+<node TEXT="Rebalance method" ID="ID_495270463" CREATED="1777614511268" MODIFIED="1777614514852">
+<node TEXT="call 4 different rotation algorithms based on conditions above" ID="ID_803000362" CREATED="1777614607601" MODIFIED="1777614621468"/>
+<node TEXT="Check the height of the subtrees (if &gt; 1 then deploy rotation)" ID="ID_1538862127" CREATED="1777614625511" MODIFIED="1777614643744">
+<node TEXT="getHeightDifference() method implementation is just take the height of the subtree than subtract with each other" ID="ID_1478276974" CREATED="1777614644519" MODIFIED="1777614674827">
+<node TEXT="treeHeight() has been implemented in Binary Tree too" ID="ID_1625723650" CREATED="1777614675177" MODIFIED="1777614684125"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+</node>
 </node>
 </node>
 </map>
