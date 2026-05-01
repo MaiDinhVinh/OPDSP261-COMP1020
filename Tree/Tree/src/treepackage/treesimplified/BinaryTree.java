@@ -64,11 +64,7 @@ public class BinaryTree<T extends Comparable<T>> {
         return 1 + leftNodeCount + rightNodeCount;
     }
 
-    public int getHeight(){
-        return this.getHeight(this.root);
-    }
-
-    private int getHeight(Node<T> node){
+    public int getHeight(Node<T> node){
         int height = 0;
 
         if(node != null){
