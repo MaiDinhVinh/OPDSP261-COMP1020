@@ -219,4 +219,56 @@ public class Graph<T extends Comparable<T>>{
             v.setIdentified(false);
         }
     }
+
+
+    //Dijkstra's Shortest Path Algorithm
+    public LinkedHashMap<Vertex<T>, Vertex<T>> dijkstra(Vertex<T> startVertex){
+        LinkedHashMap<Vertex<T>, Integer> distances = new LinkedHashMap<>();
+        LinkedHashMap<Vertex<T>, Vertex<T>> predecessors = new LinkedHashMap<>();
+
+        //class used just for the algorithm only
+        class ShortestDistVertex<V extends Comparable<V>>{
+            private Vertex<V> vertex;
+            private int shortestDistance;
+
+            public ShortestDistVertex(Vertex<V> vertex, int shortestDistance){
+                this.vertex = vertex;
+                this.shortestDistance = shortestDistance;
+            }
+
+            public int getShortestDistance() {
+                return shortestDistance;
+            }
+
+            public Vertex<V> getVertex() {
+                return vertex;
+            }
+        }
+
+        PriorityQueue<ShortestDistVertex<T>> queue = new PriorityQueue<>(
+                Comparator.comparingInt(ShortestDistVertex::getShortestDistance)
+        );
+
+        ///BEGIN ALGORITHM
+
+        if(this.vertices.isEmpty()){
+            return predecessors;
+        }
+        distances.put(startVertex, 0);
+        for(Vertex<T> v: this.vertices){
+            if(v.getValue().compareTo(startVertex.getValue()) == 0){
+                continue;
+            }
+            distances.put(startVertex, null);
+        }
+        queue.add(new ShortestDistVertex<>(startVertex, 0));
+        while(!queue.isEmpty()){
+            ShortestDistVertex<T> temp = queue.poll();
+            Vertex<T> currentVertex = temp.getVertex();
+            for(Edge<T> e: currentVertex.getEdges()){
+
+            }
+        }
+        return predecessors;
+    }
 }
