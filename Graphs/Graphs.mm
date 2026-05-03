@@ -4,7 +4,7 @@
 <node TEXT="Graphs" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1777644118881" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<hook NAME="MapStyle" background="#2e3440ff" zoom="1.9487174">
+<hook NAME="MapStyle" background="#2e3440ff" zoom="2.1435893">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" auto_compact_layout="true" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/dark_nord_template.mm" followedTemplateLocation="template:/dark_nord_template.mm" followedMapLastTime="1777174276858" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
@@ -468,22 +468,71 @@
 <node TEXT="The chromatic number of a planar graph is no greater than 4" ID="ID_1480908077" CREATED="1777724360511" MODIFIED="1777724378112"/>
 </node>
 </node>
+<node TEXT="7 - All Graph algorithms" POSITION="top_or_left" ID="ID_128412049" CREATED="1777784755096" MODIFIED="1777785171008" HGAP_QUANTITY="2 pt" VSHIFT_QUANTITY="127.5 pt">
+<node TEXT="Traversals" ID="ID_675743527" CREATED="1777785158525" MODIFIED="1777785162418">
+<node TEXT="BFS - Breadth First Search" POSITION="top_or_left" ID="ID_525641306" CREATED="1777784769871" MODIFIED="1777784776842">
+<node TEXT="In BFS, we visit the first node first, then, we visit all adjacent nodes to this first node (for each adjacent node, we will visit all nodes that are adjacent to this node) =&gt; We do this recursively (structural recursive)" ID="ID_1071244479" CREATED="1777784794382" MODIFIED="1777785018280">
+<node TEXT="Pseudocode - Table 10.4 (not Carrano book, chapter 10)" ID="ID_756543114" CREATED="1777785088473" MODIFIED="1777785122557">
+<font BOLD="true" ITALIC="true"/>
+</node>
+</node>
+</node>
+</node>
+</node>
 <node TEXT="6 - Graph implementation in Java" POSITION="bottom_or_right" ID="ID_635598116" CREATED="1777724882851" MODIFIED="1777725232457" HGAP_QUANTITY="-15.25 pt" VSHIFT_QUANTITY="36.75 pt" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
 <node TEXT="COMP1020 prioritize using Adjacency List over Adjacency Matrix so that&apos;s what we will focus on" ID="ID_1420874858" CREATED="1777724929872" MODIFIED="1777724961992"/>
-<node TEXT="What do we need on Graph ADT ?" ID="ID_1813865401" CREATED="1777725036228" MODIFIED="1777725238127" VSHIFT_QUANTITY="116.25 pt">
-<node TEXT="" ID="ID_1589892179" CREATED="1777725518883" MODIFIED="1777725518883">
-<hook NAME="FirstGroupNode"/>
+<node TEXT="Some basic graphs operations (except some mfs like BFS, DFS, A*, Dijkstra)" ID="ID_771137449" CREATED="1777772720171" MODIFIED="1777775419833" VSHIFT_QUANTITY="143.25 pt" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="Graph building operations" ID="ID_566104984" CREATED="1777774824590" MODIFIED="1777774829884">
+<node TEXT="add vertices" ID="ID_64543043" CREATED="1777774962033" MODIFIED="1777774975305"/>
+<node TEXT="add edges" ID="ID_99923320" CREATED="1777774966617" MODIFIED="1777774969105"/>
 </node>
-<node TEXT="1. Create a graph with the specified number of vertices" ID="ID_11989317" CREATED="1777725059404" MODIFIED="1777725084315"/>
-<node TEXT="2. Iterate through all the vertices in the graph" ID="ID_87327785" CREATED="1777725084665" MODIFIED="1777725095015"/>
-<node TEXT="3. Iterate through the vertices that are adjacent to a specified vertex" ID="ID_1026570001" CREATED="1777725095665" MODIFIED="1777725121836"/>
-<node TEXT="4. Determine whether an edge exists between 2 vertices" ID="ID_882929885" CREATED="1777725122555" MODIFIED="1777725138978"/>
-<node TEXT="5. Determine the weight of an edge between 2 vertices" ID="ID_86798069" CREATED="1777725139786" MODIFIED="1777725151456"/>
-<node TEXT="6. Insert an edge into the graph" ID="ID_1137412416" CREATED="1777725151936" MODIFIED="1777725165047"/>
-<node TEXT="" ID="ID_865506201" CREATED="1777725518883" MODIFIED="1777725518883">
-<hook NAME="SummaryNode"/>
-<hook NAME="AlwaysUnfoldedNode"/>
-<node TEXT="Check Graph&lt;T&gt; interface" ID="ID_1806987487" CREATED="1777725518883" MODIFIED="1777725534843"/>
+<node TEXT="Graph properties" ID="ID_299628829" CREATED="1777774830810" MODIFIED="1777775407401" VSHIFT_QUANTITY="25.5 pt">
+<node TEXT="get number of vertices" ID="ID_1738085021" CREATED="1777774982893" MODIFIED="1777774987463"/>
+<node TEXT="get number of edges" ID="ID_74243672" CREATED="1777775005174" MODIFIED="1777775008896">
+<node TEXT="get total edges exist in this graph" ID="ID_1279804121" CREATED="1777776956857" MODIFIED="1777776961880"/>
+</node>
+<node TEXT="is directed" ID="ID_701353939" CREATED="1777775010538" MODIFIED="1777775014484">
+<node TEXT="check if this graph is a directed graph" ID="ID_152892336" CREATED="1777775015058" MODIFIED="1777775024094"/>
+</node>
+<node TEXT="is empty" ID="ID_1443124143" CREATED="1777775033019" MODIFIED="1777775087111">
+<node TEXT="check if this graph is empty or not" ID="ID_1007708351" CREATED="1777775087115" MODIFIED="1777775105085"/>
+</node>
+</node>
+<node TEXT="Edges and Neighbor Queries" ID="ID_1728676501" CREATED="1777774839190" MODIFIED="1777775405732" VSHIFT_QUANTITY="16.5 pt">
+<node TEXT="is edge" ID="ID_914789249" CREATED="1777775107896" MODIFIED="1777775121466">
+<node TEXT="receive 2 nodes and check if there is an edge between these 2 nodes" ID="ID_943196169" CREATED="1777775121616" MODIFIED="1777775141156"/>
+</node>
+<node TEXT="get edge" ID="ID_117845499" CREATED="1777775164137" MODIFIED="1777775166776">
+<node TEXT="get an edge between 2 specific nodes" ID="ID_1083093367" CREATED="1777775167086" MODIFIED="1777775203587"/>
+</node>
+<node TEXT="edge iterator" ID="ID_1903002825" CREATED="1777775206169" MODIFIED="1777775210028">
+<node TEXT="return an iterator to get all edges related to this node" ID="ID_1120498747" CREATED="1777775210183" MODIFIED="1777775232346"/>
+</node>
+</node>
+<node TEXT="clear()" ID="ID_441235412" CREATED="1777775395521" MODIFIED="1777775403971" VSHIFT_QUANTITY="60.75 pt">
+<node TEXT="clear the graph" ID="ID_1591318655" CREATED="1777775398043" MODIFIED="1777775401281"/>
+</node>
+</node>
+<node TEXT="How to represent vertices and edges ?" ID="ID_1413448016" CREATED="1777773289722" MODIFIED="1777773674409" VSHIFT_QUANTITY="73.5 pt">
+<node TEXT="2 classes" ID="ID_80544625" CREATED="1777773300162" MODIFIED="1777773633568" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="Edge&lt;T&gt;" ID="ID_1026633129" CREATED="1777773305220" MODIFIED="1777773732720">
+<node TEXT="Attributes" ID="ID_119260069" CREATED="1777773551457" MODIFIED="1777773557287">
+<node TEXT="endVertex" ID="ID_916583350" CREATED="1777773608268" MODIFIED="1777773612057">
+<node TEXT="the terminal vertex of an edge" ID="ID_930496524" CREATED="1777773617788" MODIFIED="1777773623308"/>
+</node>
+<node TEXT="weight" ID="ID_1692243087" CREATED="1777773613728" MODIFIED="1777773616028">
+<node TEXT="numerical value associated with an edge" ID="ID_425749283" CREATED="1777773623910" MODIFIED="1777773630868"/>
+</node>
+</node>
+</node>
+<node TEXT="Vertex&lt;T&gt;" ID="ID_850073211" CREATED="1777773311874" MODIFIED="1777773633566" VSHIFT_QUANTITY="18.75 pt">
+<node TEXT="Attributes" ID="ID_1528460442" CREATED="1777773634713" MODIFIED="1777773640598">
+<node TEXT="value" ID="ID_544681898" CREATED="1777773643849" MODIFIED="1777773652628"/>
+<node TEXT="edgeList" ID="ID_356113216" CREATED="1777773653235" MODIFIED="1777773658108">
+<node TEXT="storing the edges pointing at this vertex" ID="ID_1267010670" CREATED="1777773659408" MODIFIED="1777773667809"/>
+</node>
+</node>
+</node>
 </node>
 </node>
 </node>
