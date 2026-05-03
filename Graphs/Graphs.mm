@@ -4,7 +4,7 @@
 <node TEXT="Graphs" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1777644118881" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<hook NAME="MapStyle" background="#2e3440ff" zoom="2.1435893">
+<hook NAME="MapStyle" background="#2e3440ff" zoom="1.9487174">
     <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" auto_compact_layout="true" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/dark_nord_template.mm" followedTemplateLocation="template:/dark_nord_template.mm" followedMapLastTime="1777174276858" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
@@ -468,12 +468,72 @@
 <node TEXT="The chromatic number of a planar graph is no greater than 4" ID="ID_1480908077" CREATED="1777724360511" MODIFIED="1777724378112"/>
 </node>
 </node>
-<node TEXT="7 - All Graph algorithms" POSITION="top_or_left" ID="ID_128412049" CREATED="1777784755096" MODIFIED="1777785171008" HGAP_QUANTITY="2 pt" VSHIFT_QUANTITY="127.5 pt">
-<node TEXT="Traversals" ID="ID_675743527" CREATED="1777785158525" MODIFIED="1777785162418">
+<node TEXT="7 - All Graph algorithms" POSITION="top_or_left" ID="ID_128412049" CREATED="1777784755096" MODIFIED="1777785171008" HGAP_QUANTITY="2 pt" VSHIFT_QUANTITY="127.5 pt" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="Traversals" ID="ID_675743527" CREATED="1777785158525" MODIFIED="1777797012566" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
 <node TEXT="BFS - Breadth First Search" POSITION="top_or_left" ID="ID_525641306" CREATED="1777784769871" MODIFIED="1777784776842">
-<node TEXT="In BFS, we visit the first node first, then, we visit all adjacent nodes to this first node (for each adjacent node, we will visit all nodes that are adjacent to this node) =&gt; We do this recursively (structural recursive)" ID="ID_1071244479" CREATED="1777784794382" MODIFIED="1777785018280">
+<node TEXT="In BFS, we visit the first node first, then, we visit all adjacent nodes to this first node (for each adjacent node, we will visit all nodes that are adjacent to this node) =&gt; We continue to do this until all nodes are visited" ID="ID_1071244479" CREATED="1777784794382" MODIFIED="1777797006989">
 <node TEXT="Pseudocode - Table 10.4 (not Carrano book, chapter 10)" ID="ID_756543114" CREATED="1777785088473" MODIFIED="1777785122557">
 <font BOLD="true" ITALIC="true"/>
+</node>
+</node>
+</node>
+<node TEXT="DFS - Depth First Search" POSITION="top_or_left" ID="ID_1149120978" CREATED="1777796955163" MODIFIED="1777797012566" VSHIFT_QUANTITY="20.25 pt">
+<node TEXT="bro idk how to explain this, you should see the diagram in chapter 10 (not Carrano book ofc) for better understand about this shit and read their pseudocode" ID="ID_245339340" CREATED="1777796961814" MODIFIED="1777797054977">
+<node TEXT="If you hate recursion, please refer to the pseudocode in Carrano book, chapter 28, where they use iterative version" ID="ID_1981761402" CREATED="1777797595329" MODIFIED="1777799323079"/>
+<node TEXT="DO NOT USE CARRANO BOOK&apos;S DIAGRAM, THEY ARE ABSOLUTELY SHIT" ID="ID_401678372" CREATED="1777799333618" MODIFIED="1777799352348"/>
+</node>
+</node>
+</node>
+<node TEXT="Finding shortest path" ID="ID_97183956" CREATED="1777808253754" MODIFIED="1777813376717" HGAP_QUANTITY="14 pt" VSHIFT_QUANTITY="62.25 pt">
+<node TEXT="Dijkstra&apos;s Algorithm" ID="ID_1474762017" CREATED="1777808262972" MODIFIED="1777808801192" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="Dijkstra&apos;s Algorithm is an algorithm used to find a shortest path from a specified node to all other nodes in the graph" ID="ID_918049240" CREATED="1777808271458" MODIFIED="1777808338192"/>
+<node TEXT="What do we need in this Algorithm" ID="ID_598853775" CREATED="1777808488785" MODIFIED="1777809702523" VSHIFT_QUANTITY="54 pt" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="Map&lt;Vertex&lt;T&gt;, Integer&gt; distances" ID="ID_920954610" CREATED="1777808500666" MODIFIED="1777809855992">
+<node TEXT="Each node is associated with a number, representing the shortest path from the initial node (the one specified in the algorithm) to this node" ID="ID_1508890436" CREATED="1777808588778" MODIFIED="1777808684003">
+<node TEXT="This is called Distance Array" ID="ID_1902102906" CREATED="1777808696170" MODIFIED="1777808701563"/>
+</node>
+</node>
+<node TEXT="Map&lt;Vertex&lt;T&gt;, Vertex&lt;T&gt;&gt; predecessors" ID="ID_554589816" CREATED="1777808727901" MODIFIED="1777808744881">
+<node TEXT="Each node is associated with a predecessor node that forms the shortest path&#xa;&#xa;Key (K) = child nodes&#xa;Value (V) = parent nodes" ID="ID_926425612" CREATED="1777808745071" MODIFIED="1777812470390">
+<node TEXT="This is called Predecessor Array" ID="ID_677626688" CREATED="1777808777392" MODIFIED="1777808790352"/>
+</node>
+</node>
+<node TEXT="PriorityQueue&lt;ShortestDistVertex&lt;T&gt;&gt; unusedVertices" ID="ID_792227457" CREATED="1777809152452" MODIFIED="1777809208201" VSHIFT_QUANTITY="30.75 pt">
+<node TEXT="This is where we save all unprocessed vertices along with its shortest distance from specified node to this node" ID="ID_552769861" CREATED="1777809211150" MODIFIED="1777809685538">
+<node TEXT="What is ShortestDistVertex&lt;T&gt; ?" ID="ID_1894901318" CREATED="1777809541096" MODIFIED="1777809552491">
+<node TEXT="A temporary class used to pack the Vertex&lt;T&gt; with the shortest distance from specified node to this node" ID="ID_467820081" CREATED="1777809552666" MODIFIED="1777809680088"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="Implementation - pseudocode" ID="ID_656354805" CREATED="1777809703619" MODIFIED="1777813382607" VSHIFT_QUANTITY="81 pt" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="Step 1" ID="ID_1418672154" CREATED="1777809917126" MODIFIED="1777809919047">
+<node TEXT="1. Create both Maps (&quot;distances&quot; and &quot;predecessors&quot;)" ID="ID_188822366" CREATED="1777809919213" MODIFIED="1777809935900"/>
+<node TEXT="2. Add the &quot;startVertex&quot; - the specified node that we want to find to the &quot;distance&quot; map with value of 0. Other nodes will be added but with value of &quot;null&quot; (or &quot;infinity&quot; to be exact)" ID="ID_522703473" CREATED="1777809992589" MODIFIED="1777810056996"/>
+<node TEXT="3. Create a ShortestDistVertex&lt;T&gt; object from &quot;startVertex&quot; with distance value of 0. Then, enqueue this item into the &quot;unusedVertices&quot;" ID="ID_143815123" CREATED="1777810063351" MODIFIED="1777810328804"/>
+</node>
+<node TEXT="Step 2" ID="ID_1863955916" CREATED="1777810430052" MODIFIED="1777810528954" VSHIFT_QUANTITY="29.25 pt">
+<node TEXT="In this step, we only need to loop until the PriorityQueue is empty, that means, all vertices have been processed" ID="ID_605085366" CREATED="1777810432422" MODIFIED="1777810526986" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
+<node TEXT="For each iteration, when we dequeue to get a ShortestDistPath&lt;T&gt; object&#xa;&#xa;From this object, we can get the vertex, and we will call this as &quot;currentVertex&quot;" ID="ID_719035360" CREATED="1777810470483" MODIFIED="1777815001357"/>
+<node TEXT="Step 3" ID="ID_608114804" CREATED="1777810521544" MODIFIED="1777810526986" VSHIFT_QUANTITY="26.25 pt">
+<node TEXT="Step 3 is code inside the loop (step 2)" ID="ID_1831962341" CREATED="1777810530246" MODIFIED="1777810540354"/>
+<node TEXT="1. We will get all stored edges from &quot;currentVertex&quot;" ID="ID_1024372179" CREATED="1777810973424" MODIFIED="1777811013233"/>
+<node TEXT="2. For each edge in stored edges in &quot;currentVertex&quot;, we will calculate the current distance from specified node to &quot;currentVertex&quot;.&#xa;&#xa;We can calculate this by getting the associated distance value in the &quot;ShortestDistPath&lt;T&gt;&quot; object and add it with the weight value of the edge&#xa;&#xa;I will call this distance as &quot;A&quot;" ID="ID_1164053616" CREATED="1777811393231" MODIFIED="1777811688049"/>
+<node TEXT="3. From each edge in stored edges in &quot;currentVertex&quot;, we will get the terminal vertex from that edge (I will call this &quot;tVertex&quot;)&#xa;&#xa;Then, we will get the shortest distance associated with that terminal edge stored in the &quot;distances&quot; map&#xa;&#xa;I will call this distance as &quot;B&quot;" ID="ID_1821971442" CREATED="1777811518662" MODIFIED="1777812588172"/>
+<node TEXT="4. We will compare &quot;A&quot; with &quot;B&quot;" ID="ID_1264352069" CREATED="1777811697786" MODIFIED="1777811705489">
+<node TEXT="If &quot;A&quot; &lt; &quot;B&quot; =&gt; We find a shorter path. In the case we find the shorter path, we will do the next step" ID="ID_1302220403" CREATED="1777811705646" MODIFIED="1777811895750">
+<node TEXT="5. We will update the value &quot;B&quot; to &quot;A&quot; in the Map &quot;distances&quot;" ID="ID_1146908708" CREATED="1777811896200" MODIFIED="1777812227156"/>
+<node TEXT="6. Record that the &quot;currentVertex&quot; is the parent node of the &quot;tVertex&quot; in the Map &quot;predecessors&quot;" ID="ID_1120056857" CREATED="1777812503811" MODIFIED="1777812631643"/>
+<node TEXT="7. Create a new ShortestDistVertex&lt;T&gt; object with &quot;tVertex&quot; and the &quot;B&quot; value and then enqueue it to the PriorityQueue" ID="ID_1931854238" CREATED="1777812634683" MODIFIED="1777812676354"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="Results" ID="ID_988777174" CREATED="1777813068841" MODIFIED="1777813477091" HGAP_QUANTITY="7.25 pt" VSHIFT_QUANTITY="196.49999 pt">
+<node TEXT="The algorithm will return back for us 2 Maps&#xa;&#xa;-) the &quot;distances&quot; Map - contains shortest distance from specified Node to all other Nodes in the Graph&#xa;&#xa;-) the &quot;predecessors&quot; Map - If we want to print out the whole shortest path, we need to &quot;backtrack&quot; the map from the terminal node to the initial node" ID="ID_1262317244" CREATED="1777813079911" MODIFIED="1777813366527">
+<node TEXT="Why do we need to &quot;backtrack&quot; the &quot;predecessors&quot; Map ? It is because a Parent Node can contain multiple Child Node, but a Child Node can only contain 1 Parent Node =&gt; To find the optimal path, we need to travel backward, from child to parent node" ID="ID_134583324" CREATED="1777813408167" MODIFIED="1777813474614"/>
+</node>
 </node>
 </node>
 </node>
