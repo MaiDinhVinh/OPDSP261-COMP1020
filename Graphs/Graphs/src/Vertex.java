@@ -6,7 +6,6 @@ public class Vertex<T extends Comparable<T>>{
 
     //FOR BFS AND DFS ONLY !!! (idk, could be usable for other things)
     private boolean isIdentified;
-    private boolean isProcessed;
 
     public Vertex(T value){
         this.value = value;
@@ -32,16 +31,8 @@ public class Vertex<T extends Comparable<T>>{
         this.edges.add(edge);
     }
 
-    public boolean isProcessed() {
-        return isProcessed;
-    }
-
     public boolean isIdentified() {
         return isIdentified;
-    }
-
-    public void setProcessed(boolean processed) {
-        isProcessed = processed;
     }
 
     public void setIdentified(boolean identified) {
