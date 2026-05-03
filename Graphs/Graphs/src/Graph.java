@@ -55,16 +55,18 @@ public class Graph<T extends Comparable<T>>{
             }
         }
         if(initExist && terminalExist){
-            for(Vertex<T> v: this.vertices){
-                if(v.getValue().compareTo(init) == 0){
-                    Edge<T> e = new Edge<>(ve);
-                    v.addEdge(e);
-                    //add another edge in the list of the opposite node for undirected graph
-                    if(!this.isDirected){
-                        Edge<T> opposite = new Edge<>(v);
-                        ve.addEdge(opposite);
+            if(!this.hasEdge(init, terminal)){
+                for(Vertex<T> v: this.vertices){
+                    if(v.getValue().compareTo(init) == 0){
+                        Edge<T> e = new Edge<>(ve);
+                        v.addEdge(e);
+                        //add another edge in the list of the opposite node for undirected graph
+                        if(!this.isDirected){
+                            Edge<T> opposite = new Edge<>(v);
+                            ve.addEdge(opposite);
+                        }
+                        return true;
                     }
-                    return true;
                 }
             }
             return false;
@@ -133,32 +135,88 @@ public class Graph<T extends Comparable<T>>{
         if(this.vertices.isEmpty()){
             return traversedVertices;
         }
-        Queue<Vertex<T>> queue = new LinkedList<>();
-        Vertex<T> first = this.vertices.get(0);
-        first.setIdentified(true);
-        queue.add(first);
-        while(!queue.isEmpty()){
-            Vertex<T> v = queue.poll();
-            for(Edge<T> e: v.getEdges()){
-                if(!e.getTerminalVertex().isIdentified()){
-                    Vertex<T> unidentified = e.getTerminalVertex();
-                    unidentified.setIdentified(true);
-                    queue.add(unidentified);
+        Vertex<T> first = this.getUnidentifiedVertex();
+        while(first != null){
+            Queue<Vertex<T>> queue = new LinkedList<>();
+            first.setIdentified(true);
+            queue.add(first);
+            while(!queue.isEmpty()){
+                Vertex<T> v = queue.poll();
+                for(Edge<T> e: v.getEdges()){
+                    if(!e.getTerminalVertex().isIdentified()){
+                        Vertex<T> unidentified = e.getTerminalVertex();
+                        unidentified.setIdentified(true);
+                        queue.add(unidentified);
+                    }
                 }
+                traversedVertices.add(v);
             }
-            v.setProcessed(true);
-            traversedVertices.add(v);
+            first = this.getUnidentifiedVertex();
         }
-        this.resetBFSState(); //all this everytime we finish a BFS traversal
+
+        //all this everytime we finish a BFS traversal, we have to call this after all iterations
+        //are completed because if we call during the outer loop, we will repeat BFS again for
+        //visited node
+        this.resetVertexState();
+
         return traversedVertices;
     }
 
-    //everytime BFS is run, the states of all nodes is updated without reset, so this method
-    //is used to reset all states of all notes
-    private void resetBFSState(){
+    /**
+     * Used for the case of Disconnected Graph, finding all unidentified nodes
+     */
+    private Vertex<T> getUnidentifiedVertex(){
+        for(Vertex<T> v: this.vertices){
+            if(!v.isIdentified()){
+                return v;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Vertex<T>> depthFirstSearch(){
+        ArrayList<Vertex<T>> dfsTraversal = new ArrayList<>();
+        Stack<Vertex<T>> vertexStack = new Stack<>();
+        if(this.vertices.isEmpty()){
+            return dfsTraversal;
+        }
+        Vertex<T> v = this.getUnidentifiedVertex();
+        while(v != null){
+            v.setIdentified(true);
+            dfsTraversal.add(v);
+            vertexStack.push(v);
+            while(!vertexStack.isEmpty()){
+                Vertex<T> topVertex = vertexStack.peek();
+                Vertex<T> unidentified = null;
+                for(Edge<T> e: topVertex.getEdges()){
+                    if(!e.getTerminalVertex().isIdentified()){
+                        unidentified = e.getTerminalVertex();
+                        break;
+                    }
+                }
+                if(unidentified != null){
+                    unidentified.setIdentified(true);
+                    dfsTraversal.add(unidentified);
+                    vertexStack.push(unidentified);
+                }else{
+                    vertexStack.pop();
+                }
+            }
+            v = this.getUnidentifiedVertex();
+        }
+
+        this.resetVertexState();
+
+        return dfsTraversal;
+    }
+
+    /**
+     * everytime BFS is run, the states of all nodes is updated without reset, so this method
+     * is used to reset all states of all notes
+     */
+    private void resetVertexState(){
         for(Vertex<T> v: this.vertices){
             v.setIdentified(false);
-            v.setProcessed(false);
         }
     }
 }
