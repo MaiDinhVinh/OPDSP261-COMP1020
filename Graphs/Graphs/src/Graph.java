@@ -1,4 +1,3 @@
-import javax.print.DocPrintJob;
 import java.util.*;
 
 public class Graph<T extends Comparable<T>>{
@@ -32,48 +31,43 @@ public class Graph<T extends Comparable<T>>{
 
     //Graph building operations
     public boolean addVertex(T vValue){
-        Vertex<T> v = new Vertex<>(vValue);
         for(Vertex<T> ve: this.vertices){
             if(ve.getValue().compareTo(vValue) == 0){
                 return false;
             }
         }
-        this.vertices.add(v);
+        this.vertices.add(new Vertex<>(vValue));
         return true;
     }
 
-    public boolean addEdge(T init, T terminal){
-        boolean initExist = false;
-        boolean terminalExist = false;
-        Vertex<T> ve = null;
+    public boolean addEdge(T init, T terminal, int weight){
+        Vertex<T> initVertex = null;
+        Vertex<T> terminalVertex = null;
         for(Vertex<T> v: this.vertices){
             if(v.getValue().compareTo(init) == 0){
-                initExist = true;
+                initVertex = v;
             }
             if(v.getValue().compareTo(terminal) == 0){
-                terminalExist = true;
-                ve = v;
+                terminalVertex = v;
             }
         }
-        if(initExist && terminalExist){
+        if(initVertex != null && terminalVertex != null){
             if(!this.hasEdge(init, terminal)){
-                for(Vertex<T> v: this.vertices){
-                    if(v.getValue().compareTo(init) == 0){
-                        Edge<T> e = new Edge<>(ve);
-                        v.addEdge(e);
-                        //add another edge in the list of the opposite node for undirected graph
-                        if(!this.isDirected){
-                            Edge<T> opposite = new Edge<>(v);
-                            ve.addEdge(opposite);
-                        }
-                        return true;
-                    }
+                Edge<T> e = new Edge<>(terminalVertex, weight);
+                initVertex.addEdge(e);
+                if(this.isDirected){
+                    return true;
                 }
+                Edge<T> opposite = new Edge<>(initVertex, weight);
+                terminalVertex.addEdge(opposite);
+                return true;
+            }else{
+                return false;
             }
-            return false;
         }
         throw new NoSuchElementException("Invalid vertex values");
     }
+
 
     public int getVertexCount(){
         return this.vertices.size();
@@ -221,53 +215,62 @@ public class Graph<T extends Comparable<T>>{
         }
     }
 
+    public LinkedHashMap<Vertex<T>, Vertex<T>> dijkstra(T startValue){
+        for(Vertex<T> v: this.vertices){
+            if(v.getValue().compareTo(startValue) == 0){
+                return this.dijkstra(v);
+            }
+        }
+        throw new NoSuchElementException("Invald vertex value");
+    }
+
 
     //Dijkstra's Shortest Path Algorithm
-    public void dijkstra(Vertex<T> startVertex){
-        ArrayList<Vertex<T>> identifed = new ArrayList<>();
-        ArrayList<Vertex<T>> unidentifed = new ArrayList<>(this.vertices);
+    private LinkedHashMap<Vertex<T>, Vertex<T>> dijkstra(Vertex<T> startVertex) {
+        ArrayList<Vertex<T>> unidentified = new ArrayList<>(this.vertices);
         LinkedHashMap<Vertex<T>, Vertex<T>> predecessors = new LinkedHashMap<>();
         LinkedHashMap<Vertex<T>, Integer> distances = new LinkedHashMap<>();
 
         ArrayList<Vertex<T>> vertices = new ArrayList<>(this.vertices);
-        vertices.remove(0);
-        unidentifed.add(startVertex);
+        vertices.remove(startVertex);
         predecessors.put(startVertex, null);
         distances.put(startVertex, 0);
 
-        for(Vertex<T> v: vertices){
+        for (Vertex<T> v : vertices) {
             predecessors.put(v, null);
-            distances.put(v, -1);// -1 = infinity
-            unidentifed.add(v);
+            distances.put(v, null);// null = infinity
         }
 
         //BEGIN ALGORITHM
-        while(!unidentifed.isEmpty()){
+        while (!unidentified.isEmpty()) {
             Vertex<T> minUnidenVertex = this.findMinUnidenVertex(distances);
-            for(Edge<T> e: minUnidenVertex.getEdges()){
-                if(!e.getTerminalVertex().isIdentified()){
+
+            if(minUnidenVertex == null) break; //disconnected graph, will end the algorithm
+
+            for (Edge<T> e : minUnidenVertex.getEdges()) {
+                if (!e.getTerminalVertex().isIdentified()) {
                     Vertex<T> tVertex = e.getTerminalVertex();
-                    int previousDist = this.getVertexDis(distances, tVertex); //always work btw, ignore Pablo (warning)
-                    if(previousDist == -1){
-                        previousDist = 0;
-                    }
-                    if(checkSmallerDistance(distances, tVertex, previousDist + e.getWeight())){
+                    int previousDist = this.getVertexDis(distances, minUnidenVertex); //always work btw, ignore Pablo (warning)
+                    if (checkSmallerDistance(distances, tVertex, previousDist + e.getWeight())) {
                         this.updateVertexDist(distances, tVertex, previousDist + e.getWeight());
                         this.updatePredecessor(predecessors, tVertex, minUnidenVertex);
                     }
                 }
             }
             minUnidenVertex.setIdentified(true);
-            identifed.add(minUnidenVertex);
-            unidentifed.remove(minUnidenVertex);
+            unidentified.remove(minUnidenVertex);
         }
+
+        this.resetVertexState();
+
+        return predecessors;
     }
 
     private Vertex<T> findMinUnidenVertex(LinkedHashMap<Vertex<T>, Integer> distances){
-        int minDist = 0;
+        int minDist = Integer.MAX_VALUE;
         Vertex<T> currentMinVertex = null;
         for(Map.Entry<Vertex<T>, Integer> e: distances.entrySet()){
-            if(e.getValue() < minDist && !e.getKey().isIdentified() && e.getValue() != -1){
+            if(e.getValue() != null && e.getValue() < minDist && !e.getKey().isIdentified()){
                 minDist = e.getValue();
                 currentMinVertex = e.getKey();
             }
@@ -275,15 +278,16 @@ public class Graph<T extends Comparable<T>>{
         return currentMinVertex;
     }
 
+    //check if the newly updated distance is smaller than the current value in the map
     private boolean checkSmallerDistance(LinkedHashMap<Vertex<T>, Integer> distances,
                                       Vertex<T> vertex,
                                       int distance){
         for(Map.Entry<Vertex<T>, Integer> e: distances.entrySet()){
             if(e.getKey().equals(vertex)){
-                if(e.getValue() == -1){
+                if(e.getValue() == null){
                     return true;
                 }else{
-                    if(vertex.getValue().compareTo(e.getKey().getValue()) < 0){
+                    if(e.getValue() > distance){
                         return true;
                     }
                 }
@@ -292,6 +296,7 @@ public class Graph<T extends Comparable<T>>{
         return false;
     }
 
+    //update the current shortest distance for each vertex in the "distances" map
     private void updateVertexDist(LinkedHashMap<Vertex<T>, Integer> distances,
                                   Vertex<T> vertex,
                                   int distance){
@@ -303,6 +308,7 @@ public class Graph<T extends Comparable<T>>{
         }
     }
 
+    //get the distance value from each vertex from the "distances" map
     private Integer getVertexDis(LinkedHashMap<Vertex<T>, Integer> distances,
                                   Vertex<T> vertex){
         for(Map.Entry<Vertex<T>, Integer> e: distances.entrySet()){
@@ -313,6 +319,7 @@ public class Graph<T extends Comparable<T>>{
         return null;
     }
 
+    //update the shortest predecessor in the "predecessors" map
     private void updatePredecessor(LinkedHashMap<Vertex<T>, Vertex<T>> predecessors,
                                    Vertex<T> child,
                                    Vertex<T> parent){
