@@ -1,3 +1,4 @@
+import javax.print.DocPrintJob;
 import java.util.*;
 
 public class Graph<T extends Comparable<T>>{
@@ -222,53 +223,104 @@ public class Graph<T extends Comparable<T>>{
 
 
     //Dijkstra's Shortest Path Algorithm
-    public LinkedHashMap<Vertex<T>, Vertex<T>> dijkstra(Vertex<T> startVertex){
-        LinkedHashMap<Vertex<T>, Integer> distances = new LinkedHashMap<>();
+    public void dijkstra(Vertex<T> startVertex){
+        ArrayList<Vertex<T>> identifed = new ArrayList<>();
+        ArrayList<Vertex<T>> unidentifed = new ArrayList<>(this.vertices);
         LinkedHashMap<Vertex<T>, Vertex<T>> predecessors = new LinkedHashMap<>();
+        LinkedHashMap<Vertex<T>, Integer> distances = new LinkedHashMap<>();
 
-        //class used just for the algorithm only
-        class ShortestDistVertex<V extends Comparable<V>>{
-            private Vertex<V> vertex;
-            private int shortestDistance;
-
-            public ShortestDistVertex(Vertex<V> vertex, int shortestDistance){
-                this.vertex = vertex;
-                this.shortestDistance = shortestDistance;
-            }
-
-            public int getShortestDistance() {
-                return shortestDistance;
-            }
-
-            public Vertex<V> getVertex() {
-                return vertex;
-            }
-        }
-
-        PriorityQueue<ShortestDistVertex<T>> queue = new PriorityQueue<>(
-                Comparator.comparingInt(ShortestDistVertex::getShortestDistance)
-        );
-
-        ///BEGIN ALGORITHM
-
-        if(this.vertices.isEmpty()){
-            return predecessors;
-        }
+        ArrayList<Vertex<T>> vertices = new ArrayList<>(this.vertices);
+        vertices.remove(0);
+        unidentifed.add(startVertex);
+        predecessors.put(startVertex, null);
         distances.put(startVertex, 0);
-        for(Vertex<T> v: this.vertices){
-            if(v.getValue().compareTo(startVertex.getValue()) == 0){
-                continue;
-            }
-            distances.put(startVertex, null);
-        }
-        queue.add(new ShortestDistVertex<>(startVertex, 0));
-        while(!queue.isEmpty()){
-            ShortestDistVertex<T> temp = queue.poll();
-            Vertex<T> currentVertex = temp.getVertex();
-            for(Edge<T> e: currentVertex.getEdges()){
 
+        for(Vertex<T> v: vertices){
+            predecessors.put(v, null);
+            distances.put(v, -1);// -1 = infinity
+            unidentifed.add(v);
+        }
+
+        //BEGIN ALGORITHM
+        while(!unidentifed.isEmpty()){
+            Vertex<T> minUnidenVertex = this.findMinUnidenVertex(distances);
+            for(Edge<T> e: minUnidenVertex.getEdges()){
+                if(!e.getTerminalVertex().isIdentified()){
+                    Vertex<T> tVertex = e.getTerminalVertex();
+                    int previousDist = this.getVertexDis(distances, tVertex); //always work btw, ignore Pablo (warning)
+                    if(previousDist == -1){
+                        previousDist = 0;
+                    }
+                    if(checkSmallerDistance(distances, tVertex, previousDist + e.getWeight())){
+                        this.updateVertexDist(distances, tVertex, previousDist + e.getWeight());
+                        this.updatePredecessor(predecessors, tVertex, minUnidenVertex);
+                    }
+                }
+            }
+            minUnidenVertex.setIdentified(true);
+            identifed.add(minUnidenVertex);
+            unidentifed.remove(minUnidenVertex);
+        }
+    }
+
+    private Vertex<T> findMinUnidenVertex(LinkedHashMap<Vertex<T>, Integer> distances){
+        int minDist = 0;
+        Vertex<T> currentMinVertex = null;
+        for(Map.Entry<Vertex<T>, Integer> e: distances.entrySet()){
+            if(e.getValue() < minDist && !e.getKey().isIdentified() && e.getValue() != -1){
+                minDist = e.getValue();
+                currentMinVertex = e.getKey();
             }
         }
-        return predecessors;
+        return currentMinVertex;
+    }
+
+    private boolean checkSmallerDistance(LinkedHashMap<Vertex<T>, Integer> distances,
+                                      Vertex<T> vertex,
+                                      int distance){
+        for(Map.Entry<Vertex<T>, Integer> e: distances.entrySet()){
+            if(e.getKey().equals(vertex)){
+                if(e.getValue() == -1){
+                    return true;
+                }else{
+                    if(vertex.getValue().compareTo(e.getKey().getValue()) < 0){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private void updateVertexDist(LinkedHashMap<Vertex<T>, Integer> distances,
+                                  Vertex<T> vertex,
+                                  int distance){
+        for(Map.Entry<Vertex<T>, Integer> e: distances.entrySet()){
+            if(e.getKey().equals(vertex)){
+                distances.put(vertex, distance);
+                break;
+            }
+        }
+    }
+
+    private Integer getVertexDis(LinkedHashMap<Vertex<T>, Integer> distances,
+                                  Vertex<T> vertex){
+        for(Map.Entry<Vertex<T>, Integer> e: distances.entrySet()){
+            if(e.getKey().equals(vertex)){
+                return e.getValue();
+            }
+        }
+        return null;
+    }
+
+    private void updatePredecessor(LinkedHashMap<Vertex<T>, Vertex<T>> predecessors,
+                                   Vertex<T> child,
+                                   Vertex<T> parent){
+        for(Map.Entry<Vertex<T>, Vertex<T>> e: predecessors.entrySet()){
+            if(e.getKey().equals(child)){
+                predecessors.put(e.getKey(), parent);
+                break;
+            }
+        }
     }
 }
