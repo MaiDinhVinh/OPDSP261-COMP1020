@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Vertex<T extends Comparable<T>>{
     private T value;
@@ -37,5 +38,35 @@ public class Vertex<T extends Comparable<T>>{
 
     public void setIdentified(boolean identified) {
         isIdentified = identified;
+    }
+
+    /**
+     * This is used for Vertex comparison and Dijkstra's Algorithm
+     * @param o   the reference object with which to compare.
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object o){
+        if(this == o){
+            return true;
+        }else if(!(o instanceof Vertex)){
+            return false;
+        }
+        //this shit always true because the graph is Homogenous
+        //please ignore the "unchecked cast" ahh pussy :whilted_rose:
+        Vertex<T> vertex = (Vertex<T>) o;
+        return vertex.value.compareTo(this.value) == 0;
+    }
+
+    /**
+     * This make sures that the hashcode of this object is always consistent
+     * with the equals return object
+     *
+     * This is used for Vertex comparison and Dijkstra's Algorithm
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
