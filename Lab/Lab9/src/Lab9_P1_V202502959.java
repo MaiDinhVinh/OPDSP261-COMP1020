@@ -90,7 +90,7 @@ public class Lab9_P1_V202502959 {
 
             Graph g = new Graph(false); // undirected graph
             for(int i = 0; i < numVertices; i++) {
-            	g.addVertex(i);
+                g.addVertex(i);
             }
             for (int i = 0; i < numEdges; i++) {
                 int u = sc.nextInt();
@@ -98,13 +98,13 @@ public class Lab9_P1_V202502959 {
                 g.addEdge(u, v);
             }
             for (Vertex v : g.getAdjacencyList()) {
-            	// Stream: convert each neighbor int to string, then join them with a space into one line
-            	String allNeighbors = v.getNeighbors()
-                  .stream()
-                  .map(i -> Integer.toString(i))
-                  .collect(Collectors.joining(" "));
-          		System.out.printf("%d: %s%n", v.getValue(), allNeighbors);
-      		}
+                // Stream: convert each neighbor integer to string, then join them with a space into one line
+                String allNeighbors = v.getNeighbors()
+                        .stream()
+                        .map(i -> Integer.toString(i))
+                        .collect(Collectors.joining(" "));
+                System.out.printf("%d: %s%n", v.getValue(), allNeighbors);
+            }
         }
     }
 }
