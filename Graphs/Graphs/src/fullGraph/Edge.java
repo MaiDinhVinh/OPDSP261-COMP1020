@@ -1,9 +1,11 @@
+package fullGraph;
+
 public class Edge<T extends Comparable<T>>{
     /**
-     * Q: Why Edge<T> only stores terminalVertex only ? What happen if we use Undirected Graph
-     * instead of Directed Graph ?
+     * Q: Why full.Edge<T> only stores terminalVertex only ? What happen if we use Undirected full.Graph
+     * instead of Directed full.Graph ?
      *
-     * A: If we use Undirected Graph, then each node will have a list of edges, which contains
+     * A: If we use Undirected full.Graph, then each node will have a list of edges, which contains
      * its opposite node and vice versa
      */
     private Vertex<T> terminalVertex;
