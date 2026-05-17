@@ -1,6 +1,7 @@
 package shortGraph;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class Graph {
     //new int[]{vertex, weight}
@@ -17,6 +18,24 @@ public class Graph {
         if(!this.isDirected){
             this.adjacencyList.get(terminal).add(new int[]{initial, weight});
         }
+    }
+
+    public int vertexInDegree(int vertex, ArrayList<ArrayList<int[]>> graph){
+        int n = graph.size();
+        int inDegree = 0;
+        if(graph.get(vertex) == null) inDegree = -1;
+        else{
+            for(ArrayList<int[]> v: graph){
+                if(v != null){
+                    for(int[] arr: v) if(arr[0] == vertex) inDegree++;
+                }
+            }
+        }
+        return inDegree;
+    }
+
+    public int vertexOutDegree(int vertex, ArrayList<ArrayList<int[]>> graph){
+        return graph.get(vertex).size();
     }
 
     public ArrayList<Integer> bfs(int start){
@@ -89,12 +108,16 @@ public class Graph {
     }
 
     public ArrayList<ArrayList<int[]>> primMst(int start){
+        if(this.isDirected){
+            throw new UnsupportedOperationException("ts doesnt work with directed graph you bitch ass");
+        }
         int n = this.adjacencyList.size();
         boolean[] inMst = new boolean[n];
         ArrayList<ArrayList<int[]>> mst = new ArrayList<>();
         for(int i = 0; i < n; i++){
             mst.add(new ArrayList<>());
         }
+        inMst[start] = true;
         PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(arr -> arr[2]));
         for(int[] arr: this.adjacencyList.get(start)){
             queue.add(new int[]{start, arr[0], arr[1]});
@@ -113,29 +136,122 @@ public class Graph {
         return mst;
     }
 
-    public void kruskalMst(){
+    public ArrayList<ArrayList<int[]>> kruskalMst(){
+        if(this.isDirected){
+            throw new UnsupportedOperationException("ts doesnt work with directed graph you bitch ass");
+        }
         ArrayList<int[]> sortedEdges = new ArrayList<>();
+        ArrayList<ArrayList<int[]>> mst = new ArrayList<>(this.adjacencyList.size());
         for(int i = 0; i < this.adjacencyList.size(); i++){
             for(int[] arr: this.adjacencyList.get(i)){
                 sortedEdges.add(new int[]{i, arr[0], arr[1]});
             }
+            mst.add(new ArrayList<>());
         }
         sortedEdges.sort(Comparator.comparingInt(arr -> arr[2]));
-        ArrayList<ArrayList<int[]>> mst = new ArrayList<>(this.adjacencyList.size());
-        for(int[] edge: sortedEdges){
-            if(mst.get(edge[0]) == null){
-                ArrayList<int[]> temp = new ArrayList<>();
-                temp.add(new int[]{edge[1], edge[2]});
-            }else{
-                if(this.checkCycle(mst, edge)){
-                    mst.get(edge[0]).add(new int[]{edge[1], edge[2]});
+        class UnionFind{
+            private ArrayList<ArrayList<Integer>> sets;
+            private ArrayList<Integer> parents;
+            public UnionFind(){
+                this.sets = new ArrayList<>();
+                this.parents = new ArrayList<>();
+                for(int i = 0; i < Graph.this.adjacencyList.size(); i++){
+                    this.parents.add(i);
+                    this.sets.add(new ArrayList<>());
+                }
+            }
+            public int findParent(int vertex){
+                if(this.parents.get(vertex) == vertex){
+                    return vertex;
+                }else{
+                    return this.findParent(this.parents.get(vertex));
+                }
+            }
+            public boolean union(int init, int term){
+                int initParent = this.findParent(init);
+                int terminalParent = this.findParent(term);
+                if(initParent != terminalParent){
+                    if(this.sets.get(initParent).size() >=
+                            this.sets.get(terminalParent).size()){
+                        this.sets.get(initParent).addAll(this.sets.get(terminalParent));
+                        this.sets.get(initParent).add(terminalParent);
+                        this.parents.set(terminalParent, initParent);
+                    }else{
+                        this.sets.get(terminalParent).addAll(this.sets.get(initParent));
+                        this.sets.get(terminalParent).add(initParent);
+                        this.parents.set(initParent, terminalParent);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        }
+        UnionFind u = new UnionFind();
+        for(int[] arr: sortedEdges){
+            if(u.union(arr[0], arr[1])){
+                mst.get(arr[0]).add(new int[]{arr[1], arr[2]});
+                mst.get(arr[1]).add(new int[]{arr[0], arr[2]});
+            }
+        }
+        return mst;
+    }
+
+    public ArrayList<Integer> kahnTopSort(){
+        Queue<Integer> queue = new LinkedList<>();
+        ArrayList<ArrayList<int[]>> graph = new ArrayList<>(this.adjacencyList);
+        for(int i = 0; i < graph.size(); i++){
+            int degree = this.vertexInDegree(i, graph);
+            if(degree == 0) queue.add(i);
+        }
+        int index = 0;
+        ArrayList<Integer> topoOrder = new ArrayList<>();
+        while(!queue.isEmpty()){
+            int vertex = queue.poll();
+            topoOrder.add(vertex);
+            index++;
+            ArrayList<int[]> arrayList = graph.get(vertex);
+            graph.set(vertex, null);
+            for(int[] arr: arrayList){
+                int newInDegreeNeighbor = this.vertexInDegree(arr[0], graph);
+                if(newInDegreeNeighbor == 0 && !queue.contains(arr[0])){
+                    queue.add(arr[0]);
                 }
             }
         }
+        if(index != this.adjacencyList.size()) return null;
+        return topoOrder;
     }
 
-
-    private boolean checkCycle(ArrayList<ArrayList<int[]>> mst, int[] edge){
-        
+    public int greedyColoring(){
+        ArrayList<Integer> vertices = new ArrayList<>();
+        for(int i = 0; i < this.adjacencyList.size(); i++){
+            vertices.add(i);
+        }
+        vertices.sort(Comparator.comparingInt(i -> -this.vertexOutDegree(i, this.adjacencyList)));
+        int largestColor = 1;
+        TreeSet<Integer> allColors = new TreeSet<>();
+        allColors.add(1);
+        ArrayList<Integer> colorizedVertices = new ArrayList<>();
+        for(int i = 0; i < this.adjacencyList.size(); i++){
+            colorizedVertices.add(-1);
+        }
+        for(int vertex: vertices){
+            TreeSet<Integer> usedColors = new TreeSet<>();
+            for(int[] arr: this.adjacencyList.get(vertex)){
+                if(colorizedVertices.get(arr[0]) != -1){
+                    usedColors.add(colorizedVertices.get(arr[0]));
+                }
+            }
+            if(usedColors.equals(allColors)){
+                largestColor++;
+                allColors.add(largestColor);
+                colorizedVertices.set(vertex, largestColor);
+            }else{
+                TreeSet<Integer> temp = new TreeSet<>(allColors);
+                temp.removeIf(usedColors::contains);
+                colorizedVertices.set(vertex, temp.first());
+            }
+        }
+        return allColors.size();
     }
 }
