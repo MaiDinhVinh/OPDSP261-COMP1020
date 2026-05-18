@@ -11,8 +11,13 @@ public class Lab10_P1_V202502959 {
                 adjList.add(new ArrayList<>());
             }
             for(int i = 0; i < m; i++){
-                adjList.get(sc.nextInt())
-                        .add(new int[]{sc.nextInt(), sc.nextInt()});
+            	int u = sc.nextInt();
+            	int v = sc.nextInt();
+            	int w = sc.nextInt();
+                adjList.get(u)
+                        .add(new int[]{v, w});
+                adjList.get(v)
+                		.add(new int[]{u, w});
             }
             int[] dist = dijkstra(adjList, start);
             for(int i = 0; i < n; i++){
