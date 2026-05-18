@@ -1,7 +1,6 @@
 package shortGraph;
 
 import java.util.*;
-import java.util.function.Function;
 
 public class Graph {
     //new int[]{vertex, weight}
@@ -222,9 +221,9 @@ public class Graph {
         return topoOrder;
     }
 
-    public int greedyColoring(){
+    public int greedyColoring() {
         ArrayList<Integer> vertices = new ArrayList<>();
-        for(int i = 0; i < this.adjacencyList.size(); i++){
+        for (int i = 0; i < this.adjacencyList.size(); i++) {
             vertices.add(i);
         }
         vertices.sort(Comparator.comparingInt(i -> -this.vertexOutDegree(i, this.adjacencyList)));
@@ -232,21 +231,21 @@ public class Graph {
         TreeSet<Integer> allColors = new TreeSet<>();
         allColors.add(1);
         ArrayList<Integer> colorizedVertices = new ArrayList<>();
-        for(int i = 0; i < this.adjacencyList.size(); i++){
+        for (int i = 0; i < this.adjacencyList.size(); i++) {
             colorizedVertices.add(-1);
         }
-        for(int vertex: vertices){
+        for (int vertex : vertices) {
             TreeSet<Integer> usedColors = new TreeSet<>();
-            for(int[] arr: this.adjacencyList.get(vertex)){
-                if(colorizedVertices.get(arr[0]) != -1){
+            for (int[] arr : this.adjacencyList.get(vertex)) {
+                if (colorizedVertices.get(arr[0]) != -1) {
                     usedColors.add(colorizedVertices.get(arr[0]));
                 }
             }
-            if(usedColors.equals(allColors)){
+            if (usedColors.equals(allColors)) {
                 largestColor++;
                 allColors.add(largestColor);
                 colorizedVertices.set(vertex, largestColor);
-            }else{
+            } else {
                 TreeSet<Integer> temp = new TreeSet<>(allColors);
                 temp.removeIf(usedColors::contains);
                 colorizedVertices.set(vertex, temp.first());
