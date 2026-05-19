@@ -4,8 +4,8 @@
 <node TEXT="Graphs" LOCALIZED_STYLE_REF="AutomaticLayout.level.root" FOLDED="false" ID="ID_1090958577" CREATED="1409300609620" MODIFIED="1777644118881" VGAP_QUANTITY="2 pt" COMMON_HGAP_QUANTITY="14 pt">
 <hook NAME="accessories/plugins/AutomaticLayout.properties" VALUE="ALL"/>
 <font BOLD="true"/>
-<hook NAME="MapStyle" background="#2e3440ff" zoom="0.3855432">
-    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" auto_compact_layout="true" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/dark_nord_template.mm" followedTemplateLocation="template:/dark_nord_template.mm" followedMapLastTime="1777644011212" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
+<hook NAME="MapStyle" background="#2e3440ff" zoom="1.3310001">
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" auto_compact_layout="true" show_tags="UNDER_NODES" show_note_icons="true" associatedTemplateLocation="template:/dark_nord_template.mm" followedTemplateLocation="template:/dark_nord_template.mm" followedMapLastTime="1777174276858" fit_to_viewport="false" show_icons="BESIDE_NODES" showTagCategories="false"/>
     <tags category_separator="::"/>
 
 <map_styles>
@@ -381,6 +381,9 @@
 <node TEXT="For Directed Graph, the adjacency matrix is not necessary to be symmetrical" ID="ID_494477015" CREATED="1777708369169" MODIFIED="1777708394620"/>
 <node TEXT="Same as Undirected Graph, the adjacency matrix can be able to represent Directed Multigraphs with loops" ID="ID_1667821216" CREATED="1777708395230" MODIFIED="1777708438161"/>
 </node>
+</node>
+<node TEXT="3.3 - Edge List" ID="ID_602588347" CREATED="1779197598271" MODIFIED="1779197608341" HGAP_QUANTITY="25.25 pt" VSHIFT_QUANTITY="315.74999 pt">
+<node TEXT="This guy only stores the list of all edges in the graphs" ID="ID_968374018" CREATED="1779197609925" MODIFIED="1779197622765"/>
 </node>
 <node TEXT="3.3 - Trade-off between Adjacency Lists and Adjacency Matrices" ID="ID_366655621" CREATED="1777708255448" MODIFIED="1777709913538" VSHIFT_QUANTITY="278.99999 pt">
 <node TEXT="" ID="ID_1927150108" CREATED="1777709477164" MODIFIED="1777709477164">
